@@ -9,6 +9,9 @@ import { BaseList } from './base-list';
       ::ng-deep list-item.inline {
         width: 400px;
       }
+      .horizontal-hidden {
+        overflow-x:hidden!important;
+      }
     </style>
 
     <button (click)="sortByName()">Sort By Name</button>
@@ -21,6 +24,7 @@ import { BaseList } from './base-list';
     <button (click)="scroll.scrollToIndex(50)">Scroll to index 50</button>
     <button (click)="scroll.scrollToPosition(1500)">Scroll to position 1500</button>
     <button (click)="randomSize = !randomSize">Toggle Random Width</button>
+    <button (click)="frozen = !frozen">Toogle scroll freeze (Frozen: {{frozen ? 'yes' :'no'}})</button>
     <button *ngIf="randomSize" (click)="ListItemComponent.ResetSeed();">Re-Randomize Item Sizes</button>
     <button *ngIf="randomSize" (click)="scroll.invalidateAllCachedMeasurements();">Invalidate cached measurements</button>
 
@@ -30,18 +34,29 @@ import { BaseList } from './base-list';
         of <span>{{filteredList?.length}}</span>
       <span>({{scroll.viewPortItems?.length}} nodes)</span>
       <span>[scrollStartPosition: {{scroll.viewPortInfo.scrollStartPosition}}px, scrollEndPosition: {{scroll.viewPortInfo.scrollEndPosition}}px, maxScrollPosition: {{scroll.viewPortInfo.maxScrollPosition}}px ]</span>
-    </div>
+    </div> 
 
     <virtual-scroller #scroll
       [enableUnequalChildrenSizes]="randomSize"
       [horizontal]="true"
-      [items]="filteredList" [RTL] = "rtl">
-      
+      [items]="filteredList" [RTL] = "rtl" [freeze]="frozen">      
+      <list-item [randomWidth]="randomSize" *ngFor="let item of scroll.viewPortItems" class="inline" [item]="item"> </list-item>
+    </virtual-scroller>
+
+    <h2>Blocked scrolling</h2>
+
+    <virtual-scroller #scroll2
+      [enableUnequalChildrenSizes]="randomSize"
+      [horizontal]="true"
+      [freeze]="true"
+      [items]="filteredList">      
       <list-item [randomWidth]="randomSize" *ngFor="let item of scroll.viewPortItems" class="inline" [item]="item"> </list-item>
     </virtual-scroller>
   `,
   styleUrls: ['./horizontal-list.scss']
 })
 export class HorizontalListComponent extends BaseList {
+
+  public frozen:boolean = false;
   @Input() rtl:boolean;
 }

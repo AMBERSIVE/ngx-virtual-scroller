@@ -1,24 +1,13 @@
-# Sponsors
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://moviepix.app/?utm_source=sponsor&utm_campaign=ngx-virtual-scroller" target="_blank">
-          <img src="https://moviepix.app/images/Logo_Small.png">
-          <img src="https://moviepix.app/images/Title_Small.png">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-# ngx-virtual-scroller
+# ambersive-virtual-scroller
 
 Virtual Scroll displays a virtual, "infinite" list. Supports horizontal/vertical, variable heights, & multi-column.
+This package is based on [ngx-virtual-scroller](https://github.com/rintoj/ngx-virtual-scroller) but will be further supported by AMBERSIVE KG.
 
-## Renamed from `angular2-virtual-scroll` to `ngx-virtual-scroller`. Please update your _package.json_
+## Install
 
+```bash
+npm install ambersive-virtual-scroller
+```
 ## About
 
 This module displays a small subset of records just enough to fill the viewport and uses the same DOM elements as the user scrolls.
@@ -27,35 +16,6 @@ This method is effective because the number of DOM elements are always constant 
 - Supports multi-column
 - Easy to use APIs
 - Open source and available in GitHub
-
-## Breaking Changes:
-
-- `v3.0.0` Several deprecated properties removed (see changelog).
-    - If items array is prepended with additional items, keep scroll on currently visible items, if possible. There is no flag to disable this, because it seems to be the best user-experience in all cases. If you disagree, please create an issue.
-- `v2.1.0` Dependency Injection syntax was changed.
-- `v1.0.6` viewPortIndices API property removed. (use viewPortInfo instead)
-- `v1.0.3` Renamed everything from _virtual-scroll_ to _virtual-scroller_ and from _virtualScroll_ to _virtualScroller_
-- `v0.4.13` _resizeBypassRefreshTheshold_ renamed to _resizeBypassRefreshThreshold_ (typo)
-- `v0.4.12` The start and end values of the change/start/end events were including bufferAmount, which made them confusing. This has been corrected.
-    - viewPortIndices.arrayStartIndex renamed to viewPortIndices.startIndex and viewPortIndices.arrayEndIndex renamed to viewPortIndices.endIndex
-- `v0.4.4` The value of IPageInfo.endIndex wasn't intuitive. This has been corrected. Both IPageInfo.startIndex and IPageInfo.endIndex are the 0-based array indexes of the items being rendered in the viewport. (Previously Change.EndIndex was the array index + 1)
-
-*Note* - API methods marked *(DEPRECATED)* will be removed in the next major version. Please attempt to stop using them in your code & create an issue if you believe they're still necessary.
-
-## New features:
-
- - RTL Support on Horizontal scrollers
- - Support for fixed `<thead>` on `<table>` elements.
- - Added API to query for current scroll px position (also passed as argument to `IPageInfo` listeners)
- - Added API to invalidate cached child item measurements (if your child item sizes change dynamically)
- - Added API to scroll to specific px position
- - If scroll container resizes, the items will auto-refresh. Can be disabled if it causes any performance issues by setting `[checkResizeInterval]="0"`
- - `useMarginInsteadOfTranslate` flag. Defaults to _false_. This can affect performance (better/worse depending on your circumstances), and also creates a workaround for the transform+position:fixed browser bug.
- - Support for horizontal scrollbars
- - Support for elements with different sizes
- - Added ability to put other elements inside of scroll (Need to wrap list itself in @ContentChild('container'))
- - Added ability to use any parent with scrollbar instead of this element (@Input() parentScroll)
-
 ## Demo
 
 [See Demo Here](http://rintoj.github.io/ngx-virtual-scroller)
@@ -100,7 +60,7 @@ npm install ngx-virtual-scroller
 
 ```ts
 ....
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { VirtualScrollerModule } from 'ambersive-virtual-scroller';
 
 ....
 
@@ -198,6 +158,7 @@ In _alphabetical_ order:
 | ssrViewportHeight                  | `number` 1080     | The hard-coded visible height of the _virtual-scroller_ (or [parentScroll]) to use if rendering via _Angular Universal/Server-Side-Rendering_.
 | ssrViewportWidth                   | `number` 1920     | The hard-coded visible width of the _virtual-scroller_ (or [parentScroll]) to use if rendering via _Angular Universal/Server-Side-Rendering_.
 | stripedTable                       | `boolean` false   | Set to true if you use a striped table. In this case, the rows will be added/removed two by two to keep the strips consistent.
+| freeze                       | `boolean` false   | Disable scrolling
 | useMarginInsteadOfTranslate        | `boolean` false   | Translate is faster in many scenarios because it can use GPU acceleration, but it can be slower if your scroll container or child elements don't use any transitions or opacity. More importantly, translate creates a new "containing block" which breaks position:fixed because it'll be relative to the transform rather than the window. If you're experiencing issues with position:fixed on your child elements, turn this flag on.
 | viewPortInfo                       | `IPageInfo`       | Allows querying the the current viewport info on demand rather than listening for events.
 | viewPortItems                      | any[]             | The array of items currently being rendered to the viewport.
@@ -205,8 +166,6 @@ In _alphabetical_ order:
 | vsEnd                              | `Event<IPageInfo>`| This event is fired every time `end` index changes and emits `IPageInfo`.
 | vsStart                            | `Event<IPageInfo>`| This event is fired every time `start` index changes and emits `IPageInfo`.
 | vsUpdate                           | `Event<any[]>`    | This event is fired every time the `start` or `end` indexes change and emits the list of items which should be visible based on the current scroll position from `start` to `end`. The list emitted by this event must be used with `*ngFor` to render the actual list of items within `<virtual-scroller>`
-| childHeight *(DEPRECATED)*         | `number`          | The minimum height of the item template's cell. Use this if `enableUnequalChildrenSizes` isn't working well enough. (The actual rendered size of the first cell is used by default if not specified.)
-| childWidth *(DEPRECATED)*          | `number`          | The minimum width of the item template's cell. Use this if `enableUnequalChildrenSizes` isn't working well enough. (The actual rendered size of the first cell is used by default if not specified.)
 
 *Note* - The Events without the "vs" prefix have been deprecated because they might conflict with native DOM events due to their "bubbling" nature. See https://github.com/angular/angular/issues/13997
 
@@ -278,7 +237,7 @@ Items _must_ have fixed height and width for this module to work perfectly. If n
 The event `vsEnd` is fired every time the scrollbar reaches the end of the list. You could use this to dynamically load more items at the end of the scroll. See below.
 
 ```ts
-import { IPageInfo } from 'ngx-virtual-scroller';
+import { IPageInfo } from 'ambersive-virtual-scroller';
 ...
 
 @Component({
@@ -383,7 +342,7 @@ If virtual scroll is used within a dropdown or collapsible menu, virtual scroll 
 
 ```ts
 import { Component, ViewChild } from '@angular/core';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { VirtualScrollerComponent } from 'ambersive-virtual-scroller';
 
 @Component({
     selector: 'rj-list',
@@ -415,7 +374,7 @@ You can use the `scrollInto()` or `scrollToIndex()` API to scroll into an item i
 
 ```ts
 import { Component, ViewChild } from '@angular/core';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { VirtualScrollerComponent } from 'ambersive-virtual-scroller';
 
 @Component({
     selector: 'rj-list',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ListItem } from './list-item.component';
 import { BaseList } from './base-list';
-import { IPageInfo } from 'ngx-virtual-scroller';
+import { IPageInfo } from 'ambersive-virtual-scroller';
 
 @Component({
   selector: 'list-with-api',

@@ -27,7 +27,7 @@
     "core-js": "2.6.2",
     "loadash": "1.0.0",
     "menuspy": "^1.1.2",
-    "ngx-virtual-scroller": "latest",
+    "ambersive-virtual-scroller": "latest",
     "npm-check": "5.9.0",
     "rxjs": "6.5.4",
     "tslib": "1.11.0",
