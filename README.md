@@ -60,7 +60,7 @@ npm install ngx-virtual-scroller
 
 ```ts
 ....
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { VirtualScrollerModule } from 'ambersive-virtual-scroller';
 
 ....
 
@@ -237,7 +237,7 @@ Items _must_ have fixed height and width for this module to work perfectly. If n
 The event `vsEnd` is fired every time the scrollbar reaches the end of the list. You could use this to dynamically load more items at the end of the scroll. See below.
 
 ```ts
-import { IPageInfo } from 'ngx-virtual-scroller';
+import { IPageInfo } from 'ambersive-virtual-scroller';
 ...
 
 @Component({
@@ -342,7 +342,7 @@ If virtual scroll is used within a dropdown or collapsible menu, virtual scroll 
 
 ```ts
 import { Component, ViewChild } from '@angular/core';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { VirtualScrollerComponent } from 'ambersive-virtual-scroller';
 
 @Component({
     selector: 'rj-list',
@@ -374,7 +374,7 @@ You can use the `scrollInto()` or `scrollToIndex()` API to scroll into an item i
 
 ```ts
 import { Component, ViewChild } from '@angular/core';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
+import { VirtualScrollerComponent } from 'ambersive-virtual-scroller';
 
 @Component({
     selector: 'rj-list',
