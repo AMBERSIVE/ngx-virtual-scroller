@@ -207,8 +207,38 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		this.minMeasuredChildHeight = undefined;
 	}
 
-	@Input()
-	public preventScrolling: boolean = false;
+	private _freeze:boolean = false;
+	@Input("freeze")
+	set freeze(value: any) {
+		this._freeze = value;
+		let scrollElement = this.getScrollElement();
+
+		if (this._freeze === true) {
+			
+			if (this.horizontal) {
+				scrollElement.classList.add("horizontal-hidden");
+			}
+			else {
+				scrollElement.classList.add("vertical-hidden");
+			}
+		
+			return;
+		}
+		else {
+
+			if (this.horizontal) {
+				scrollElement.classList.remove("horizontal-hidden");
+			}
+			else {
+				scrollElement.classList.remove("vertical-hidden");
+			}
+		
+		}
+
+	}
+	get freeze() {
+		return this._freeze;
+	}
 
 	@Input()
 	public RTL: boolean = false;
@@ -750,7 +780,7 @@ export class VirtualScrollerComponent implements OnInit, OnChanges, OnDestroy {
 		//The code would typically quit out on the 2nd iteration anyways. The main time it'd think more than 2 runs would be necessary would be for vastly different sized child items or if this is the 1st time the items array was initialized.
 		//Without maxRunTimes, If the user is actively scrolling this code would become an infinite loop until they stopped scrolling. This would be okay, except each scroll event would start an additional infinte loop. We want to short-circuit it to prevent this.
 
-		if (this.preventScrolling === true) {
+		if (this.freeze === true) {
 			return;
 		}
 

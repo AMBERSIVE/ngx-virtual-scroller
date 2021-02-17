@@ -10,7 +10,7 @@
     "cleanup": "rimraf dist",
     "install-dependencies": "npm install -g rimraf copyfiles replace nan",
     "build": "ng-packagr -p package.json",
-    "build:docs": "npm run build && rimraf demo/node_modules/ngx-virtual-scroller && copyfiles dist/**/* demo/node_modules/ngx-virtual-scroller && rimraf docs && mkdir docs && npm i --prefix demo && npm run build --prefix demo && cp -r demo/dist/demo/ docs && replace \"<base href=\\\"/\\\">\" \"<base href=\\\"/ngx-virtual-scroller/\\\">\" docs/index.html",
+    "build:docs": "npm run build && npm i --prefix demo && rimraf demo/node_modules/ngx-virtual-scroller && cp -r dist/ demo/node_modules/ngx-virtual-scroller && rimraf docs && mkdir docs && npm run build --prefix demo && cp -r demo/dist/demo/ docs && replace \"<base href=\\\"/\\\">\" \"<base href=\\\"/ngx-virtual-scroller/\\\">\" docs/index.html",
     "build:all": "npm run build && npm run install-dependencies && npm run build:docs",
     "lint": "tslint src/**/*.ts",
     "debug-demo": "npm run build:all && npm run start --prefix demo",
