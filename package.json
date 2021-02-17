@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "name": "ngx-virtual-scroller",
+  "name": "ambersive-virtual-scroller",
   "version": "4.0.3",
   "description": "Angular module for virtual -infinite- list. Supports horizontal/vertical, variable heights, & multi-column",
   "main": "dist/virtual-scroller.js",
@@ -10,7 +10,7 @@
     "cleanup": "rimraf dist",
     "install-dependencies": "npm install -g rimraf copyfiles replace nan",
     "build": "ng-packagr -p package.json",
-    "build:docs": "npm run build && npm i --prefix demo && rimraf demo/node_modules/ngx-virtual-scroller && cd ./dist && cp -r . ../demo/node_modules/ngx-virtual-scroller && cd ../ && rimraf docs && mkdir docs && npm run build --prefix demo && cd demo/dist/demo && cp -r . ../../../docs &&  cd ../../../ && replace \"<base href=\\\"/\\\">\" \"<base href=\\\"/ngx-virtual-scroller/\\\">\" ./docs/index.html",
+    "build:docs": "npm run build && npm i --prefix demo && rimraf demo/node_modules/ambersive-virtual-scroller && cd ./dist && cp -r . ../demo/node_modules/ambersive-virtual-scroller && cd ../ && rimraf docs && mkdir docs && npm run build --prefix demo && cd demo/dist/demo && cp -r . ../../../docs &&  cd ../../../ && replace \"<base href=\\\"/\\\">\" \"<base href=\\\"/ambersive-virtual-scroller/\\\">\" ./docs/index.html",
     "build:all": "npm run build && npm run install-dependencies && npm run build:docs",
     "lint": "tslint src/**/*.ts",
     "debug-demo": "npm run build:all && npm run start --prefix demo",
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rintoj/ngx-virtual-scroller.git"
+    "url": "git+https://github.com/ambersive/ngx-virtual-scroller.git"
   },
   "keywords": [
     "virtual scroll",
@@ -56,9 +56,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rintoj/ngx-virtual-scroller/issues"
+    "url": "https://github.com/ambersive/ngx-virtual-scroller/issues"
   },
-  "homepage": "https://github.com/rintoj/ngx-virtual-scroller#readme",
+  "homepage": "https://github.com/ambersive/ngx-virtual-scroller#readme",
   "peerDependencies": {
     "@angular/core": ">=6.0.0"
   },
